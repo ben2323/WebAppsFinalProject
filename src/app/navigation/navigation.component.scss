@@ -1,0 +1,22 @@
+$nav-padding: 10px;
+
+
+  .navbar-container {
+    background-color: #d0d0d0;
+    padding: $nav-padding;
+    a {
+      color:#636363;
+      text-decoration: none;
+      margin: 5px;
+      padding: $nav-padding;
+      &:hover{
+        background-color: #b7b7b7;
+        transition: background-color 1s;
+      }
+      &.active{
+        background-color: #616161;
+        color: white;
+      }
+    }
+  }
+
