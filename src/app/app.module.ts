@@ -2,17 +2,17 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import {APP_ROUTING} from "./app.routing";
+import {APP_ROUTING} from './app.routing';
 import { NavigationBarComponent } from './navigation/navigation.component';
-import {MdToolbarModule} from "@angular/material";
-import {ApiService} from "./common/services/api.service";
-import {HttpModule} from "@angular/http";
-import {HttpService} from "./common/services/http.service";
+import {MdToolbarModule} from '@angular/material';
+import {ApiService} from './common/services/api.service';
+import {HttpModule} from '@angular/http';
+import {HttpService} from './common/services/http.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavigationBarComponent
+    NavigationBarComponent,
   ],
   imports: [
     HttpModule,

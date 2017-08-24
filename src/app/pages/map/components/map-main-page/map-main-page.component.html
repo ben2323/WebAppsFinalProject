@@ -1,0 +1,14 @@
+<h1>{{ title }}</h1>
+
+<!-- this creates a google map on the page with the given lat/lng from -->
+<div ng-app="myApp" ng-controller="myCtrl">
+    <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
+      <div *ngFor="let item of locations; let i = index">
+        <agm-marker [latitude]="item.lat" [longitude]="item.lng"></agm-marker>
+      </div>
+    </agm-map>
+</div>
+<!--
+<agm-map [latitude]=(x.lat) [longitude]=[{{x.lng}}]>
+  <agm-marker [latitude]={{x.lat}} [longitude]={{x.lng}}></agm-marker>
+</agm-map>-->
