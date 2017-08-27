@@ -1,0 +1,40 @@
+$properties-width-open: 300px;
+$properties-width-closed: 10px;
+$properties-margin: 15px;
+md-sidenav {
+  width: $properties-width-open;
+  padding: 20px;
+  border: 1px solid #7d7d7d;
+  margin-left: 10px;
+}
+
+md-sidenav-container {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+
+  .mat-sidenav-backdrop.mat-sidenav-shown{
+    display: none;
+  }
+}
+
+.grid-container {
+  &.full-width {
+    width: 100%;
+  }
+  &.mid-size {
+    width: calc(100%  - #{$properties-margin})
+  }
+}
+
+.properties-container {
+
+  &.open {
+    width: $properties-width-open;
+  }
+  &.close {
+    width: $properties-width-closed;
+  }
+}
+
+

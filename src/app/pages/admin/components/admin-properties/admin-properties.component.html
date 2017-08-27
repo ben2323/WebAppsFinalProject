@@ -1,0 +1,45 @@
+<div class="properties-wrapper">
+  <div class="properties-title">
+    <div class="inline-block"><h4>{{title}}</h4></div>
+    <div class="close-button" (click)="close()">x</div>
+  </div>
+  <div class="properties-body">
+    <md-input-container>
+      <input mdInput placeholder="Name" [(ngModel)]="properties.name">
+    </md-input-container>
+    <md-input-container>
+      <input mdInput placeholder="City" [(ngModel)]="properties.city.name">
+    </md-input-container>
+    <md-input-container>
+      <input mdInput placeholder="Template" [(ngModel)]="properties.template">
+    </md-input-container>
+    <md-input-container>
+      <textarea mdInput placeholder="Texts" [(ngModel)]="properties.texts"></textarea>
+    </md-input-container>
+    <md-input-container>
+      <textarea mdInput placeholder="Images" [(ngModel)]="properties.images"></textarea>
+    </md-input-container>
+    <md-input-container>
+      <input mdInput placeholder="Time Duration(Seconds)" [(ngModel)]="properties.timeDuration">
+    </md-input-container>
+    <md-input-container>
+      <textarea mdInput placeholder="Screens" [(ngModel)]="properties.screens"></textarea>
+    </md-input-container>
+    <md-input-container>
+      <input mdInput [mdDatepicker]="pickerFrom" placeholder="From Date">
+      <button mdSuffix [mdDatepickerToggle]="pickerFrom"></button>
+    </md-input-container>
+    <md-datepicker #pickerFrom></md-datepicker>
+    <md-input-container>
+      <input mdInput [mdDatepicker]="pickerTo" placeholder="To Date">
+      <button mdSuffix [mdDatepickerToggle]="pickerTo"></button>
+    </md-input-container>
+    <md-datepicker #pickerTo></md-datepicker>
+
+  </div>
+  <div class="property-footer">
+    <button type="button">Save</button>
+    <button type="button">Cancel</button>
+  </div>
+</div>
+

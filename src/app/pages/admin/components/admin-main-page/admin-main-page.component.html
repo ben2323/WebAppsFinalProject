@@ -1,4 +1,19 @@
-
-<p>
-  admin-main-page works!
-</p>
+<md-sidenav-container >
+  <md-sidenav [align]="'end'" [disableClose]="false" [mode]="'side'" #propertiesRef>
+    <div class="properties-container">
+      <admin-properties *ngIf="currentItem"
+                        (onClose)="hideProperties()"
+                        [properties]="currentItem"
+                        [title]="currentItem.name"></admin-properties>
+    </div>
+  </md-sidenav>
+  <div class="grid-container" *ngIf="rows"
+       [ngClass]="{'full-width': !propertiesRef.opened, 'mid-size': propertiesRef.opened}">
+    <ngx-datatable #mainGridRef
+                   class="material"
+                   (activate)="onRowClicked($event)"
+                   [rows]="rows"
+                   [columns]="cols">
+    </ngx-datatable>
+  </div>
+</md-sidenav-container>

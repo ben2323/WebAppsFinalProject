@@ -5,11 +5,19 @@
 const express = require('express');
 const router = express.Router();
 const AdController = require('../controllers/AdController');
+const WeatherController = require('../controllers/WeatherController');
 
-router.get('/', (req, res) => {
-    res.send("lll");
+
+router.get('/weather/:cityName', (req, res) => {
+  WeatherController.getByCity(req.params.cityName).subscribe(weather=>{
+    res.json(weather);
+  },(error)=>{
+    res.json(error);
+  })
 });
 
+
+/* Ads */
 router.get('/ads', (req, res) => {
   AdController.getAll().then(ads=>{
     res.json(ads);

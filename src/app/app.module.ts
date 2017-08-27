@@ -8,6 +8,7 @@ import {MdToolbarModule} from '@angular/material';
 import {ApiService} from './common/services/api.service';
 import {HttpModule} from '@angular/http';
 import {HttpService} from './common/services/http.service';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -17,7 +18,7 @@ import {HttpService} from './common/services/http.service';
   imports: [
     HttpModule,
     APP_ROUTING,
-    BrowserModule,
+    BrowserAnimationsModule,
     MdToolbarModule
   ],
   providers: [HttpService, ApiService],
