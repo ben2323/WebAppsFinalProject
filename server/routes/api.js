@@ -9,9 +9,9 @@ const WeatherController = require('../controllers/WeatherController');
 
 
 router.get('/weather/:cityName', (req, res) => {
-  WeatherController.getByCity(req.params.cityName).subscribe(weather=>{
+  WeatherController.getByCity(req.params.cityName).subscribe(weather => {
     res.json(weather);
-  },(error)=>{
+  }, (error) => {
     res.json(error);
   })
 });
@@ -19,31 +19,31 @@ router.get('/weather/:cityName', (req, res) => {
 
 /* Ads */
 router.get('/ads', (req, res) => {
-  AdController.getAll().then(ads=>{
+  AdController.getAll().then(ads => {
     res.json(ads);
   })
 });
 
 router.get('/ads/:id', (req, res) => {
-  AdController.getById(req.id).subscribe(ad=>{
+  AdController.getById(req.id).subscribe(ad => {
     res.json(ad);
   })
 });
 
 router.delete('/ads/:id', (req, res) => {
-  AdController.delete(req.id).subscribe(succeeded=>{
+  AdController.delete(req.id).subscribe(succeeded => {
     res.send(succeeded);
   });
 });
 
 router.post('/ads', (req, res) => {
-  AdController.add(req.ad).subscribe(adId=>{
+  AdController.add(req.ad).subscribe(adId => {
     res.send(adId);
   });
 });
 
 router.post('/ads/:id', (req, res) => {
-  AdController.update(req.adId, req.ad).subscribe(succeeded=>{
+  AdController.update(req.adId, req.ad).subscribe(succeeded => {
     res.send(succeeded);
   });
 });
