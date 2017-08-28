@@ -42,8 +42,8 @@ router.post('/ads', (req, res) => {
   });
 });
 
-router.post('/ads/:id', (req, res) => {
-  AdController.update(req.adId, req.ad).subscribe(succeeded => {
+router.post('/ads/:adId', (req, res) => {
+  AdController.update(req.params.adId, req.params.ad).subscribe(succeeded => {
     res.send(succeeded);
   });
 });

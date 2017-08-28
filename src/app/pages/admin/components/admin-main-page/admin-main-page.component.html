@@ -1,19 +1,28 @@
-<md-sidenav-container >
+<md-sidenav-container class="app-container">
   <md-sidenav [align]="'end'" [disableClose]="false" [mode]="'side'" #propertiesRef>
     <div class="properties-container">
       <admin-properties *ngIf="currentItem"
                         (onClose)="hideProperties()"
+                        (onSave)="saveProperties($event)"
                         [properties]="currentItem"
                         [title]="currentItem.name"></admin-properties>
     </div>
   </md-sidenav>
   <div class="grid-container" *ngIf="rows"
        [ngClass]="{'full-width': !propertiesRef.opened, 'mid-size': propertiesRef.opened}">
-    <ngx-datatable #mainGridRef
-                   class="material"
-                   (activate)="onRowClicked($event)"
-                   [rows]="rows"
-                   [columns]="cols">
-    </ngx-datatable>
+    <div class="grid-header header blue">
+      <h4 class="title-with-one-icon">Ads</h4>
+      <i (click)="addNewAd()" title="Add New Ad" class="btn btn-add fa fa-plus"></i>
+    </div>
+    <div class="grid-content">
+      <ngx-datatable #mainGridRef
+                     class="material"
+                     [columnMode]="'force'"
+                     (activate)="onRowClicked($event)"
+                     [rows]="rows"
+                     [columns]="cols">
+      </ngx-datatable>
+    </div>
+
   </div>
 </md-sidenav-container>

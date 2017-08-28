@@ -29,9 +29,11 @@ module.exports =  class AdController {
   }
 
   static update(adId, ad) {
-    const succeeded = true;
-    return Observable.create(observer => {
-      observer.next(succeeded);
-    });
+    return DbConnection.connect()
+      .then(db => db.collection("ads")
+      .findOneAndReplace(
+        {_id: adId}, ad, { upsert : true, returnNewDocument: true }
+      ).toArray());
+
   }
 }

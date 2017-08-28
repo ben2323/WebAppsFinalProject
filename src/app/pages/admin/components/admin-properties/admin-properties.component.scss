@@ -6,3 +6,27 @@
     }
   }
 }
+
+.properties-wrapper{
+  height: 100%;
+
+  .mat-button{
+    color: white;
+  }
+
+  .properties-body{
+    box-sizing: border-box;
+    padding: 10px 10px 0px;
+    height: calc(100% - 70px);
+    overflow-y: auto;
+  }
+
+  .property-footer{
+    padding-right: 10px;
+    text-align: right;
+  }
+
+  md-input-container{
+    width: 100%;
+  }
+}

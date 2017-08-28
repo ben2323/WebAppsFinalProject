@@ -4,9 +4,13 @@ import { AdminMainPageComponent } from './components/admin-main-page/admin-main-
 import {adminRouting} from './admin.routing';
 import {NgxDatatableModule} from "@swimlane/ngx-datatable";
 import { AdminPropertiesComponent } from './components/admin-properties/admin-properties.component';
-import {MdInputModule, MdDatepickerModule, MdNativeDateModule, MdSidenavModule} from "@angular/material";
+import {
+  MdInputModule, MdDatepickerModule, MdNativeDateModule, MdSidenavModule,
+  MdButtonModule
+} from "@angular/material";
 import {FormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {AdminService} from "./admin.service";
 
 @NgModule({
   imports: [
@@ -17,8 +21,10 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     MdInputModule,
     MdNativeDateModule,
     MdDatepickerModule,
-    MdSidenavModule
+    MdSidenavModule,
+    MdButtonModule
   ],
+  providers: [AdminService],
   declarations: [AdminMainPageComponent, AdminPropertiesComponent]
 })
 export class AdminModule { }

@@ -1,7 +1,9 @@
-import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit, ViewChild, ViewEncapsulation, ChangeDetectorRef} from '@angular/core';
 import {ApiService} from "../../../../common/services/api.service";
 import {MdSidenav} from "@angular/material";
 import {DatatableComponent} from "@swimlane/ngx-datatable";
+import {AdminService} from "../../admin.service";
+import {AdModel} from "../../../../models/ad.model";
 
 @Component({
   selector: 'admin-main-page',
@@ -13,20 +15,20 @@ export class AdminMainPageComponent implements OnInit {
   @ViewChild('propertiesRef') propertiesRef: MdSidenav;
   @ViewChild('mainGridRef') mainGridRef: DatatableComponent;
 
-  currentItem:any;
+  currentItem:AdModel;
   cols: any[];
-  rows: any[];
+  rows: AdModel[];
 
 
-  constructor(private _apiService: ApiService) {
+  constructor(private _adminService: AdminService) {
   }
 
   ngOnInit() {
     this.cols = this.initiateGridOptions();
 
-    this._apiService.getAllAds().subscribe(a => {
-      console.log(a);
-      this.rows = a;
+    this._adminService.getAllAds().subscribe(rows => {
+      console.log(rows);
+      this.rows = rows;
     })
   }
 
@@ -34,38 +36,46 @@ export class AdminMainPageComponent implements OnInit {
     return [
       {name: 'Name', prop: 'name'},
       {name: 'City', prop: 'city.name'},
-      {name: 'Template', prop: 'templateUrl'},
-      {name: 'Texts', prop: 'texts'},
-      {name: 'Images', prop: 'imagesUrl'},
       {name: 'Time Duration', prop: 'timeDuration'},
-      {name: 'Screens', prop: 'screens'},
       {name: 'From Date', prop: 'fromDate'},
-      {name: 'To Date', prop: 'toDate', width: 99999},
+      {name: 'To Date', prop: 'toDate'},
     ];
   }
 
   hideProperties() {
-    this.propertiesRef.close();
-    this.mainGridRef.recalculate();
+    this.propertiesRef.close().then(()=>{
+      this.recalculateGrid();
+    });
   }
 
   onRowClicked(event) {
     if (event.type !== 'click') {
       return;
     }
-    this.currentItem = event.row;
+    this.currentItem = Object.assign({},event.row);
     this.showProperties();
     console.log(event);
   }
 
   showProperties() {
-    this.propertiesRef.open();
+    this.propertiesRef.open().then(()=>{
+      this.recalculateGrid();
+      // to call change detection of grid
+      this.rows = [...this.rows];
+    })
+
+  }
+
+  recalculateGrid(){
     this.mainGridRef.recalculate();
   }
 
-  /*  toggleProperties(){
-   this.propertiesRef.
-   this.propertiesRef.toggle();
-   this.isPropertyOpen = !this.isPropertyOpen;
-   }*/
+  saveProperties(properties:any){
+    this._adminService.updateAd(properties._id, properties).subscribe(res=>{console.log(res)});
+  }
+
+  addNewAd(){
+    this.currentItem = new AdModel();
+    this.showProperties();
+  }
 }
