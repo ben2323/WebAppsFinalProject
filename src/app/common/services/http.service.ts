@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
-import {Http, Headers, RequestOptions} from "@angular/http";
+import {Http, Headers, RequestOptions, Response} from "@angular/http";
 import 'rxjs/add/operator/map';
+import {Observable} from "rxjs";
 
 @Injectable()
 export class HttpService {
@@ -13,9 +14,24 @@ export class HttpService {
   }
 
   httpPost(url: string, body: any) {
-    const headers = new Headers({'Content-Type': 'application/json'}); // ... Set content type to JSON
-    const options = new RequestOptions({headers: headers});
-    return this._http.post(url, JSON.stringify(body), options).map(a => a.json());
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+    return this._http.post(url, body, options)
+      .map(this.extractData)
+      .catch(this.handleErrorObservable);
+  }
+
+  httpDelete(url: string){
+    return this._http.delete(url);
+  }
+
+  private extractData(res: Response) {
+    let body = res.json();
+    return body.data || {};
+  }
+  private handleErrorObservable (error: Response | any) {
+    console.error(error.message || error);
+    return Observable.throw(error.message || error);
   }
 
 }

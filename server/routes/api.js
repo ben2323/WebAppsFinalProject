@@ -31,7 +31,7 @@ router.get('/ads/:id', (req, res) => {
 });
 
 router.delete('/ads/:id', (req, res) => {
-  AdController.delete(req.id).subscribe(succeeded => {
+  AdController.delete(req.params.id).then(succeeded => {
     res.send(succeeded);
   });
 });
@@ -42,8 +42,11 @@ router.post('/ads', (req, res) => {
   });
 });
 
-router.post('/ads/:adId', (req, res) => {
-  AdController.update(req.params.adId, req.params.ad).subscribe(succeeded => {
+router.post('/ads/:id', (req, res) => {
+  AdController.update(req.params.id, req.body.ad).then(succeeded => {
+    AdController.getAll().then(ads=>{
+      req.io.emit('adsUpdated', ads);
+    });
     res.send(succeeded);
   });
 });

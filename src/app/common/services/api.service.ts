@@ -14,6 +14,15 @@ export class ApiService {
   }
 
   public updateAd(adId:string, ad:AdModel): Observable<any>{
-    return this._httpService.httpPost(Constants.UPDATE_AD + adId, ad);
+    return this._httpService.httpPost(Constants.UPDATE_AD + adId, {ad: ad});
   }
+
+  public deleteAd(adId:string) : Observable<any>{
+    return this._httpService.httpDelete(Constants.DELETE_AD + adId)
+  }
+
+  public getWeatherByCity(city: string): Observable<any>{
+    return this._httpService.httpGet(Constants.GET_WEATHER + city);
+  }
+
 }

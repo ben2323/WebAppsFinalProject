@@ -1,7 +1,8 @@
 /**
  * Created by ben on 19/08/17.
  */
-const MongoClient = require('mongodb');
+const MongoClient = require('mongodb'),
+      ObjectID = MongoClient.ObjectID;
 
 module.exports = class DbConnection{
   static connect() {
@@ -11,5 +12,13 @@ module.exports = class DbConnection{
           err ? reject(err) : resolve(db);
         });
     });
+  }
+
+  static generateNewId(){
+    return new ObjectID();
+  }
+
+  static generateObjectId(objectId){
+    return  ObjectID(objectId);
   }
 };

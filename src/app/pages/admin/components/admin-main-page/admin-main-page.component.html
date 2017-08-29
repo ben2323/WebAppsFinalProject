@@ -11,14 +11,16 @@
   <div class="grid-container" *ngIf="rows"
        [ngClass]="{'full-width': !propertiesRef.opened, 'mid-size': propertiesRef.opened}">
     <div class="grid-header header blue">
-      <h4 class="title-with-one-icon">Ads</h4>
+      <h4 class="title-with-two-icons">Ads</h4>
       <i (click)="addNewAd()" title="Add New Ad" class="btn btn-add fa fa-plus"></i>
+      <i (click)="deleteAd()" title="Remove Selected Ad" class="btn btn-add fa fa-trash"></i>
     </div>
     <div class="grid-content">
       <ngx-datatable #mainGridRef
                      class="material"
                      [columnMode]="'force'"
-                     (activate)="onRowClicked($event)"
+                     [selectionType]="'single'"
+                     (select)="onRowClicked($event)"
                      [rows]="rows"
                      [columns]="cols">
       </ngx-datatable>

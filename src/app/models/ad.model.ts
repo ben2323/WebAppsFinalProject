@@ -3,6 +3,7 @@
  */
 export class AdModel{
   name: string;
+  _id: string;
   city:{
     name:string
   };
