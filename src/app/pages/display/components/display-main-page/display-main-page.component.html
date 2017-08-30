@@ -1,3 +1,5 @@
-<p>
-  display-main-page works!
-</p>
+<ng-container *ngIf="citiesAdsMap">
+  <ng-container *ngFor="let city of cities">
+    <city-screen [dataChanged]="dataChangedNotifier" [ads]="citiesAdsMap[city]" [cityName]="city"></city-screen>
+  </ng-container>
+</ng-container>

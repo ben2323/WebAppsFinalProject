@@ -6,9 +6,9 @@ import {NgxDatatableModule} from "@swimlane/ngx-datatable";
 import { AdminPropertiesComponent } from './components/admin-properties/admin-properties.component';
 import {
   MdInputModule, MdDatepickerModule, MdNativeDateModule, MdSidenavModule,
-  MdButtonModule
+  MdButtonModule, MdAutocompleteModule
 } from "@angular/material";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {AdminService} from "./admin.service";
 
@@ -22,7 +22,9 @@ import {AdminService} from "./admin.service";
     MdNativeDateModule,
     MdDatepickerModule,
     MdSidenavModule,
-    MdButtonModule
+    MdButtonModule,
+    MdAutocompleteModule,
+    ReactiveFormsModule
   ],
   providers: [AdminService],
   declarations: [AdminMainPageComponent, AdminPropertiesComponent]

@@ -10,11 +10,9 @@ md-sidenav {
   box-sizing: border-box;
 }
 
-
-
 md-sidenav-container {
   font-size: 12px;
-  .mat-sidenav{
+  .mat-sidenav {
     top: 10px;
     height: 90%;
   }
@@ -25,6 +23,9 @@ md-sidenav-container {
 }
 
 .grid-container {
+  .ngx-datatable.fixed-row .datatable-scroll .datatable-body-row .datatable-body-cell {
+    padding-top: 5px;
+  }
   padding: 10px;
   box-sizing: border-box;
   &.full-width {

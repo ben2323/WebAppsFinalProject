@@ -3,6 +3,7 @@ import {Observable} from "rxjs";
 import {Constants} from "../constants";
 import {HttpService} from "./http.service";
 import {AdModel} from "../../models/ad.model";
+import {CityModel} from "../../models/city.model";
 
 @Injectable()
 export class ApiService {
@@ -23,6 +24,10 @@ export class ApiService {
 
   public getWeatherByCity(city: string): Observable<any>{
     return this._httpService.httpGet(Constants.GET_WEATHER + city);
+  }
+
+  public getAdsCities(): Observable<CityModel[]>{
+    return this._httpService.httpGet(Constants.GET_CITIES);
   }
 
 }

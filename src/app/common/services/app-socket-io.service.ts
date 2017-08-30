@@ -21,7 +21,6 @@ export class AppSocketIoService {
       this.socket.on('adsUpdated', (ads: AdModel[]) => {
         console.log('ads: ', ads);
         observer.next(ads);
-
       });
     });
   }

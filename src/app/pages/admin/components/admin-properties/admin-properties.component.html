@@ -4,41 +4,44 @@
     <i (click)="close()" class="btn fa fa-close"></i>
   </div>
   <div class="properties-body">
-    <md-input-container>
-      <input mdInput placeholder="Name" [(ngModel)]="properties.name">
-    </md-input-container>
-    <md-input-container>
-      <input mdInput placeholder="City" [(ngModel)]="properties.city.name">
-    </md-input-container>
-    <md-input-container>
-      <input mdInput placeholder="Template" [(ngModel)]="properties.templateUrl">
-    </md-input-container>
-    <md-input-container>
-      <textarea mdInput placeholder="Texts" [(ngModel)]="properties.texts"></textarea>
-    </md-input-container>
-    <md-input-container>
-      <textarea mdInput placeholder="Images" [(ngModel)]="properties.imagesUrl"></textarea>
-    </md-input-container>
-    <md-input-container>
-      <input mdInput placeholder="Time Duration(Seconds)" [(ngModel)]="properties.timeDuration">
-    </md-input-container>
-    <md-input-container>
-      <textarea mdInput placeholder="Screens" [(ngModel)]="properties.screens"></textarea>
-    </md-input-container>
-    <md-input-container>
-      <input mdInput [(ngModel)]="properties.fromDate" [mdDatepicker]="pickerFrom" placeholder="From Date">
-      <button mdSuffix [mdDatepickerToggle]="pickerFrom"></button>
-    </md-input-container>
-    <md-datepicker #pickerFrom></md-datepicker>
-    <md-input-container>
-      <input mdInput [(ngModel)]="properties.toDate" [mdDatepicker]="pickerTo" placeholder="To Date">
-      <button mdSuffix [mdDatepickerToggle]="pickerTo"></button>
-    </md-input-container>
-    <md-datepicker #pickerTo></md-datepicker>
+    <form>
 
-    <div class="weather-info-container">
-      {{weatherInfo | async}}
-    </div>
+      <md-input-container>
+        <input mdInput placeholder="Name" name="name" [(ngModel)]="properties.name">
+      </md-input-container>
+        <md-input-container>
+          <input [formControl]="cityControl" name="city" [mdAutocomplete]="auto" mdInput placeholder="City"
+                 [(ngModel)]="properties.city.name">
+        </md-input-container>
+        <md-autocomplete #auto="mdAutocomplete">
+          <md-option *ngFor="let city of filteredCities | async" (click)="setCity(city)"  [value]="city.name">
+            {{ city.name }}
+          </md-option>
+        </md-autocomplete>
+
+
+
+      <md-input-container>
+        <textarea mdInput placeholder="Content" name="content" [(ngModel)]="properties.htmlContent"></textarea>
+      </md-input-container>
+      <md-input-container>
+        <input mdInput placeholder="Time Duration(Seconds)" name="time" [(ngModel)]="properties.timeDuration">
+      </md-input-container>
+      <md-input-container>
+        <input mdInput [(ngModel)]="properties.fromDate" name="from" [mdDatepicker]="pickerFrom" placeholder="From Date">
+        <button mdSuffix [mdDatepickerToggle]="pickerFrom"></button>
+      </md-input-container>
+      <md-datepicker #pickerFrom></md-datepicker>
+      <md-input-container>
+        <input mdInput [(ngModel)]="properties.toDate" name="to"  [mdDatepicker]="pickerTo" placeholder="To Date">
+        <button mdSuffix [mdDatepickerToggle]="pickerTo"></button>
+      </md-input-container>
+      <md-datepicker #pickerTo></md-datepicker>
+
+      <div class="weather-info-container">
+        {{weatherInfo | async}}
+      </div>
+    </form>
 
   </div>
   <div class="property-footer">

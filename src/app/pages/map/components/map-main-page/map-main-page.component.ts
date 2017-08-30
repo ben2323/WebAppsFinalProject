@@ -1,4 +1,8 @@
-import { Component, OnInit  } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ApiService} from "../../../../common/services/api.service";
+import {CityModel} from "../../../../models/city.model";
+import {Observable} from "rxjs";
+import {AppSocketIoService} from "../../../../common/services/app-socket-io.service";
 
 @Component({
   selector: 'map-main-page',
@@ -11,21 +15,26 @@ export class MapComponent implements OnInit {
   lat: number = 32.109333;
   lng: number = 34.855499;
 
-  // instead of this, take from server array of locations
-  locations: any = [
-    {
-      'lat': 32.109333,
-      'lng': 34.855499
-    },
-    {
-      'lat': 51.507351,
-      'lng': -0.127758
-    }
-  ]
+  locations: CityModel[];
 
-  constructor() { }
+  constructor(private _apiService: ApiService, private _sockets: AppSocketIoService) {
+  }
 
   ngOnInit() {
+    this._apiService.getAdsCities().subscribe(cities=>{
+      this.locations = cities;
+    });
+    this._sockets.onAdsUpdated().subscribe(ads => {
+      this.locations = ads.map(ad => {
+        return {
+          city: {
+            name: ad.city.name,
+            lat: ad.city.lat,
+            lng: ad.city.lng
+          }
+        }
+      })
+    })
   }
 }
 

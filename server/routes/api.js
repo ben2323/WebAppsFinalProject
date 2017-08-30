@@ -16,6 +16,11 @@ router.get('/weather/:cityName', (req, res) => {
   })
 });
 
+router.get('/cities', (req, res) => {
+  AdController.getAll({city:true}).then(ads => {
+    res.json(ads);
+  })
+});
 
 /* Ads */
 router.get('/ads', (req, res) => {
@@ -32,23 +37,31 @@ router.get('/ads/:id', (req, res) => {
 
 router.delete('/ads/:id', (req, res) => {
   AdController.delete(req.params.id).then(succeeded => {
+    emitAdsUpdated(req.io);
     res.send(succeeded);
   });
 });
 
-router.post('/ads', (req, res) => {
-  AdController.add(req.ad).subscribe(adId => {
-    res.send(adId);
-  });
-});
 
 router.post('/ads/:id', (req, res) => {
-  AdController.update(req.params.id, req.body.ad).then(succeeded => {
-    AdController.getAll().then(ads=>{
-      req.io.emit('adsUpdated', ads);
-    });
+  AdController.updateOrAdd(req.params.id, req.body.ad).then(succeeded => {
+    emitAdsUpdated(req.io);
     res.send(succeeded);
   });
 });
+
+router.post('/cities/ads', (req, res) => {
+  AdController.updateOrAdd(req.params.id, req.body.ad).then(succeeded => {
+    emitAdsUpdated(req.io);
+    res.send(succeeded);
+  });
+});
+
+
+function emitAdsUpdated(io){
+  AdController.getAll().then(ads=>{
+    io.emit('adsUpdated', ads);
+  });
+}
 
 module.exports = router;

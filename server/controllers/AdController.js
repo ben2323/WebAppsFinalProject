@@ -5,8 +5,8 @@
 const DbConnection = require('../utils/db-connection');
 
 module.exports = class AdController {
-  static getAll() {
-    return DbConnection.connect().then(db => db.collection("ads").find({}).toArray());
+  static getAll(project = {}) {
+    return DbConnection.connect().then(db => db.collection("ads").find({}, project).toArray());
   }
 
   static getById(id) {
@@ -25,8 +25,7 @@ module.exports = class AdController {
     return DbConnection.connect().then(db => db.collection("ads").remove({_id: DbConnection.generateObjectId(adId)}));
   }
 
-  static update(adId, ad) {
-
+  static updateOrAdd(adId, ad) {
     delete ad._id;
     return DbConnection.connect()
       .then(db => db.collection("ads")

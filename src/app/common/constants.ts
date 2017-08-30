@@ -9,4 +9,6 @@ export class Constants {
 
   static GET_WEATHER = 'api/weather/';
 
+  static GET_CITIES = 'api/cities';
+
 }

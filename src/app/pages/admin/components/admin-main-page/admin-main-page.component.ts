@@ -73,8 +73,7 @@ export class AdminMainPageComponent implements OnInit {
   }
 
   saveProperties(properties: any) {
-    const propertiesWithArray = this._adminService.convertToArray({texts: true, imagesUrls: true}, properties);
-    this._adminService.updateAd(properties._id, propertiesWithArray).subscribe(res => {
+    this._adminService.updateAd(properties._id, properties).subscribe(res => {
       this.loadAds();
       console.log(res);
       if (!this.isInEditingMode) {
