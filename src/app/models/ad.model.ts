@@ -7,6 +7,7 @@ export class AdModel{
   _id: string;
   city: CityModel;
   htmlContent: string;
+  timeDuration: number;
 
   constructor(){
     this.name = 'New Ad';

@@ -1,5 +1,6 @@
 import {Component, OnInit, Input} from '@angular/core';
 import {AdModel} from "../../../../models/ad.model";
+import {DomSanitizer} from "@angular/platform-browser";
 
 @Component({
   selector: 'city-screen',
@@ -13,9 +14,24 @@ export class CityScreenComponent implements OnInit {
   @Input() dataChanged: string;
 
   currentAdShowing: AdModel;
-  constructor() { }
+
+  constructor(public sanitized: DomSanitizer) {
+  }
 
   ngOnInit() {
-    this.currentAdShowing = this.ads[0];
+    this.setCurrentAdShowing(0);
+  }
+
+  setCurrentAdShowing(adIndex: number) {
+    this.currentAdShowing = this.ads[adIndex];
+      if (adIndex < (this.ads.length - 1)) {
+        setTimeout(()=>{
+          this.setCurrentAdShowing(adIndex + 1);
+        }, this.ads[adIndex].timeDuration * 1000);
+      } else {
+        setTimeout(()=>{
+          this.setCurrentAdShowing(0);
+        }, this.ads[adIndex].timeDuration * 1000);
+      }
   }
 }

@@ -11,6 +11,14 @@ export class AdminService {
     return this._apiService.getAllAds();
   }
 
+  getAdsByQuery(query: any) {
+    return this._apiService.getAdsByQuery(query);
+  }
+
+  getAdsCount() {
+    return this._apiService.getAdsByQuery({isGroupBy: true});
+  }
+
   updateAd(adId: string, ad: AdModel) {
     return this._apiService.updateAd(adId, ad);
   }

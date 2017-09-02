@@ -11,6 +11,7 @@ import {
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {AdminService} from "./admin.service";
+import { SearchComponent } from './components/search/search.component';
 
 @NgModule({
   imports: [
@@ -27,6 +28,6 @@ import {AdminService} from "./admin.service";
     ReactiveFormsModule
   ],
   providers: [AdminService],
-  declarations: [AdminMainPageComponent, AdminPropertiesComponent]
+  declarations: [AdminMainPageComponent, AdminPropertiesComponent, SearchComponent]
 })
 export class AdminModule { }

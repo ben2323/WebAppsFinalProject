@@ -29,6 +29,12 @@ router.get('/ads', (req, res) => {
   })
 });
 
+router.post('/ads', (req, res) => {
+  AdController.findByQuery(req.body.query).then(ads => {
+    res.json(ads);
+  })
+});
+
 router.get('/ads/:id', (req, res) => {
   AdController.getById(req.id).subscribe(ad => {
     res.json(ad);

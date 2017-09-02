@@ -18,7 +18,10 @@ export class AdminMainPageComponent implements OnInit {
 
   currentItem: AdModel;
   cols: any[];
+  adsCountCols: any[];
+  adsCountRows: any;
   rows: AdModel[];
+
 
   isInEditingMode: boolean;
 
@@ -27,6 +30,7 @@ export class AdminMainPageComponent implements OnInit {
 
   ngOnInit() {
     this.cols = this.initiateGridOptions();
+    this.adsCountCols = this.initiateAdsCountGridOptions();
     this.loadAds();
     this._sockets.onAdsUpdated().subscribe(res=>{
       this.rows = res;
@@ -42,6 +46,13 @@ export class AdminMainPageComponent implements OnInit {
       {name: 'Time Duration', prop: 'timeDuration'},
       {name: 'From Date', prop: 'fromDate'},
       {name: 'To Date', prop: 'toDate'},
+    ];
+  }
+
+  initiateAdsCountGridOptions() {
+    return [
+      {name: 'City', prop: '_id'},
+      {name: 'Ads Count', prop: 'total'},
     ];
   }
 
@@ -87,6 +98,10 @@ export class AdminMainPageComponent implements OnInit {
       console.log(rows);
       this.rows = rows;
     });
+
+    this._adminService.getAdsCount().subscribe(result=>{
+      this.adsCountRows = result;
+    })
   }
 
   addNewAd() {
@@ -100,5 +115,9 @@ export class AdminMainPageComponent implements OnInit {
     this._adminService.deleteAd(this.currentItem._id).subscribe(result=>{
       this.loadAds();
     });
+  }
+
+  searchResultsReady(results: AdModel[]){
+    this.rows = results;
   }
 }

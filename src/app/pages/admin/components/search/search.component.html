@@ -1,0 +1,12 @@
+<md-input-container>
+  <input mdInput placeholder="Name" name="name" [(ngModel)]="searchParams.name">
+</md-input-container>
+
+<md-input-container>
+  <input mdInput placeholder="Content" name="name" [(ngModel)]="searchParams.htmlContent">
+</md-input-container>
+
+<md-input-container>
+  <input mdInput placeholder="Time Duration" name="name" [(ngModel)]="searchParams.timeDuration">
+</md-input-container>
+<button class="blue" md-button (click)="find()">Find</button>

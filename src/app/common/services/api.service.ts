@@ -14,6 +14,10 @@ export class ApiService {
     return this._httpService.httpGet(Constants.GET_ALL_ADS);
   }
 
+  public getAdsByQuery(query:any): Observable<any>{
+    return this._httpService.httpPost(Constants.FIND_BY_QUERY, {query: query});
+  }
+
   public updateAd(adId:string, ad:AdModel): Observable<any>{
     return this._httpService.httpPost(Constants.UPDATE_AD + adId, {ad: ad});
   }

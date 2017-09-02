@@ -27,7 +27,7 @@ export class HttpService {
 
   private extractData(res: Response) {
     let body = res.json();
-    return body.data || {};
+    return body || {};
   }
   private handleErrorObservable (error: Response | any) {
     console.error(error.message || error);

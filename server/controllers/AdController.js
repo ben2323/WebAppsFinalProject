@@ -34,7 +34,25 @@ module.exports = class AdController {
         ));
   }
 
-  static deleteIdKey(ad) {
+  static findByQuery(query) {
+    let _query = {};
+    if (query.isGroupBy) {
+      _query =   [
+        { $group : { _id : "$city.name", total: { $sum: 1 } } }
+      ];
+
+      return DbConnection.connect().then(db => db.collection("ads").aggregate(_query).toArray());
+    }
+    if (query.name) {
+      _query.name = query.name;
+    }
+    if (query.htmlContent) {
+      _query.htmlContent = {'$regex': query.htmlContent};
+    }
+    if (query.timeDuration) {
+      _query.timeDuration = query.timeDuration;
+    }
+    return DbConnection.connect().then(db => db.collection("ads").find(_query).toArray());
   }
 
 };
