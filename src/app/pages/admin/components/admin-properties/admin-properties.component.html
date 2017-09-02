@@ -27,16 +27,16 @@
       <md-input-container>
         <input mdInput placeholder="Time Duration(Seconds)" name="time" [(ngModel)]="properties.timeDuration">
       </md-input-container>
-      <md-input-container>
+<!--      <md-input-container>
         <input mdInput [(ngModel)]="properties.fromDate" name="from" [mdDatepicker]="pickerFrom" placeholder="From Date">
-        <button mdSuffix [mdDatepickerToggle]="pickerFrom"></button>
+        <button mdSuffix [md-datepicker-toggle]="pickerFrom"></button>
       </md-input-container>
       <md-datepicker #pickerFrom></md-datepicker>
       <md-input-container>
         <input mdInput [(ngModel)]="properties.toDate" name="to"  [mdDatepicker]="pickerTo" placeholder="To Date">
-        <button mdSuffix [mdDatepickerToggle]="pickerTo"></button>
+        <button mdSuffix [md-datepicker-toggle]="pickerTo"></button>
       </md-input-container>
-      <md-datepicker #pickerTo></md-datepicker>
+      <md-datepicker #pickerTo></md-datepicker>-->
 
       <div class="weather-info-container">
         {{weatherInfo | async}}
